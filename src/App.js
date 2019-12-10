@@ -91,11 +91,7 @@ function App() {
         potencia = fonte * corrente;
         alert(
           `Resistencia equivalente: ${resultado.toFixed(2)} Ω 
-          \n Corrente Total: ${corrente}
-          \n Corrente I1: ${(r1 * corrente).toFixed(2) / r1}
-          \n Corrente I2: ${(r1 * corrente).toFixed(2) / r2}
-          \n Corrente I3: ${corrente}
-          \n Corrente: ${corrente.toFixed(2)} A
+          \n Corrente Total: ${(corrente * 1000).toFixed(2)} mA
           \n Tensão R1: ${(r1 * corrente).toFixed(2)}V
           \n Tensão R2: ${(r2 * corrente).toFixed(2)}V
           \n Tensão R3: ${(r3 * corrente).toFixed(2)}V
