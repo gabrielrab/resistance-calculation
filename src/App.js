@@ -22,45 +22,79 @@ function App() {
     let corrente; // corrente = tensao/resistencia equivalente Amperes
     let potencia; // Valor da fonte * corrente
 
+    let c1, c2, c3;
+
     switch (type) {
       case "1":
         console.log("Serie");
         resultado = parseInt(r1) + parseInt(r2) + parseInt(r3);
         corrente = fonte / resultado;
         potencia = fonte * corrente;
+
         alert(
           `Resistencia equivalente: ${resultado.toFixed(2)} Ω 
-          \n Corrente: ${corrente.toFixed(2)} A
-          \n Tensão R1: ${(r1 * corrente).toFixed(2)}V
-          \n Tensão R2: ${(r2 * corrente).toFixed(2)}V
-          \n Tensão R3: ${(r3 * corrente).toFixed(2)}V
-          \n `
+          \n Corrente: ${corrente.toFixed(4)} A
+          \n Tensão R1: ${(parseInt(r1) * corrente).toFixed(2)}V
+          \n Tensão R2: ${(parseInt(r2) * corrente).toFixed(2)}V
+          \n Tensão R3: ${(parseInt(r3) * corrente).toFixed(2)}V
+          \n Potencial1: ${(
+            corrente *
+            (parseInt(r1) * corrente) *
+            1000
+          ).toFixed(2)}kW
+          \n Potencial2: ${(
+            corrente *
+            (parseInt(r2) * corrente) *
+            1000
+          ).toFixed(2)}kW
+          \n Potencial3: ${(
+            corrente *
+            (parseInt(r3) * corrente) *
+            1000
+          ).toFixed(2)}kW
+          \n Potencia Total ${potencia.toFixed(2)}W
+          `
         );
         break;
 
       case "2":
         console.log("Paralela");
         resultado =
-          1 / (1 / parseInt(r1) + 1 / parseInt(r2) + 1 / parseInt(r3));
-        corrente = fonte / resultado;
-        potencia = fonte * corrente;
+          (parseInt(r1) * parseInt(r2) * parseInt(r3)) /
+          (parseInt(r1) + parseInt(r2) + parseInt(r3));
+        corrente = parseInt(fonte) / resultado;
+        potencia = parseInt(fonte) * corrente;
+
+        c1 = parseInt(fonte) / r1;
+        c2 = parseInt(fonte) / r2;
+        c3 = parseInt(fonte) / r3;
+
         alert(
           `Resistencia equivalente: ${resultado.toFixed(2)} Ω 
-          \n Corrente: ${corrente.toFixed(2)} A
-          \n Tensão R1: ${(r1 * corrente).toFixed(2)}V
-          \n Tensão R2: ${(r2 * corrente).toFixed(2)}V
-          \n Tensão R3: ${(r3 * corrente).toFixed(2)}V
-          \n `
+          \n Corrente total: ${(parseInt(fonte) / resultado).toFixed(2)}
+          \n Corrente I1: ${parseInt(fonte) / r1} A
+          \n Corrente I2: ${parseInt(fonte) / r2} A
+          \n Corrente I3: ${parseInt(fonte) / r3} A
+          \n Tensão R1: ${parseInt(fonte).toFixed(2)}V
+          \n Tensão R2: ${parseInt(fonte).toFixed(2)}V
+          \n Tensão R3: ${parseInt(fonte).toFixed(2)}V
+          \n Pontecia Total ${fonte * (c1 + c2 + c3)}`
         );
         break;
 
       case "3":
         console.log("Mista");
-        resultado = 1 / (1 / parseInt(r1) + 1 / parseInt(r2)) + parseInt(r3);
-        corrente = fonte / resultado;
+        resultado =
+          (parseInt(r1) * parseInt(r2)) / (parseInt(r1) + parseInt(r2)) +
+          parseInt(r3);
+        corrente = parseInt(fonte) / resultado;
         potencia = fonte * corrente;
         alert(
           `Resistencia equivalente: ${resultado.toFixed(2)} Ω 
+          \n Corrente Total: ${corrente}
+          \n Corrente I1: ${(r1 * corrente).toFixed(2) / r1}
+          \n Corrente I2: ${(r1 * corrente).toFixed(2) / r2}
+          \n Corrente I3: ${corrente}
           \n Corrente: ${corrente.toFixed(2)} A
           \n Tensão R1: ${(r1 * corrente).toFixed(2)}V
           \n Tensão R2: ${(r2 * corrente).toFixed(2)}V
